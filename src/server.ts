@@ -14,7 +14,7 @@ const setupRoutes = (app: express.Application) => {
         return res.status(200)
     });
 
-    app.use('/predict', async (req: Request, res: Response) => {
+    app.post('/predict', async (req: Request, res: Response) => {
         const prediction = await loadAndPredict(req.body.message)
         return res.json({
             prediction: prediction
