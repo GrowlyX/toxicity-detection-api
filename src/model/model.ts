@@ -1,7 +1,9 @@
 import * as DICTIONARY from './dictionary';
-import { loadLayersModel, tensor2d, LayersModel, Tensor } from '@tensorflow/tfjs';
+import {loadLayersModel, tensor2d, LayersModel, Tensor, io} from '@tensorflow/tfjs-node';
 
-const MODEL_JSON_URL = 'https://gist.githubusercontent.com/GrowlyX/5b5d564f33cefbf7c6f4434d81f83bdc/raw/eff6eb744bb50ec26346b544e2a912bc5e5b9411/keras';
+const modelPath = '/model/model.json';
+const handler = io.fileSystem(modelPath);
+
 const ENCODING_LENGTH = 21; // The number of input elements the ML Model is expecting, 21 because we have 20 words plus the START token.
 
 let model: LayersModel | undefined = undefined;
@@ -13,7 +15,7 @@ let model: LayersModel | undefined = undefined;
  */
 export async function loadAndPredict(inputText: string): Promise<number> {
   if (model === undefined) {
-    model = await loadLayersModel(MODEL_JSON_URL);
+    model = await loadLayersModel(handler);
   }
 
   // Convert sentence to lower case, strip all characters that are not alphanumeric or spaces,
