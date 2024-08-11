@@ -1,7 +1,7 @@
 import * as DICTIONARY from './dictionary';
 import {loadLayersModel, tensor2d, LayersModel, Tensor, io} from '@tensorflow/tfjs-node';
 
-const modelPath = '/model/model.json';
+const modelPath = '/home/test/toxicity-detection-api/model/model.json';
 const handler = io.fileSystem(modelPath);
 
 const ENCODING_LENGTH = 21; // The number of input elements the ML Model is expecting, 21 because we have 20 words plus the START token.
